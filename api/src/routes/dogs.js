@@ -10,8 +10,9 @@ router.get("/", async (req, res, next) => {
   //     Si no existe ninguna raza de perro mostrar un mensaje adecuado
   //    GET https://api.thedogapi.com/v1/breeds/search?q={raza_perro}
   let { name } = req.query;
-  let breedsDB, breedsApi;
+  let breedsDB, breedsApi, helper1, helper2, helper3;
   if (name) {
+    breedsApi = { data: undefined };
     breedsDB = await Race.findAll({
       where: {
         name: {
@@ -21,6 +22,11 @@ router.get("/", async (req, res, next) => {
     });
     breedsApi = await axios.get(
       `https://api.thedogapi.com/v1/breeds/search?q=${name}`
+    );
+
+    helper1 = await axios.get(`https://api.thedogapi.com/v1/breeds`);
+    breedsApi.data = helper1.data.filter((e) =>
+      e.name.toLowerCase().includes(name.toLowerCase())
     );
   } else {
     breedsDB = await Race.findAll();
@@ -33,6 +39,7 @@ router.get("/", async (req, res, next) => {
       height: breed.height,
       weight: breed.weight,
       life_span: breed.life_span,
+      image_url: breed.image.url,
     };
   });
   let allBreeds = [...breedsDB, ...filteredBreeds];
