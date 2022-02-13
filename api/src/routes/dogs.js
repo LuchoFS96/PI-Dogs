@@ -14,10 +14,13 @@ router.get("/", async (req, res, next) => {
   if (name) {
     breedsApi = { data: undefined };
     breedsDB = await Race.findAll({
-      where: {
-        name: {
-          [Op.iLike]: "%" + name + "%",
-        },
+      // where: {
+      //   name: {
+      //     [Op.iLike]: "%" + name + "%",
+      //   },
+      // },
+      include: {
+        model: Temperament,
       },
     });
     breedsApi = await axios.get(
@@ -29,7 +32,11 @@ router.get("/", async (req, res, next) => {
       e.name.toLowerCase().includes(name.toLowerCase())
     );
   } else {
-    breedsDB = await Race.findAll();
+    breedsDB = await Race.findAll({
+      include: {
+        model: Temperament,
+      },
+    });
     breedsApi = await axios.get("https://api.thedogapi.com/v1/breeds");
   }
   let filteredBreeds = breedsApi.data.map((breed) => {
@@ -62,6 +69,7 @@ router.get("/:id", async (req, res, next) => {
       weight: breed.weight,
       life_span: breed.life_span,
       temperament: breed.temperament,
+      image: breed.image.url,
     };
   });
   let allBreeds = [...breedsDB, ...filteredBreeds];

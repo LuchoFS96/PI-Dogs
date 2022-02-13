@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import CreateDog from "../createDog";
 import Dogs from "../dogs";
 import SearchBar from "../searchBar";
 
@@ -5,6 +7,7 @@ export default function Home() {
   return (
     <div className="Home">
       <SearchBar />
+      <Link to="/create">Create</Link>
       <Dogs />
     </div>
   );

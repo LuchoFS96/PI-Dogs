@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Race } = require("../db");
+const { Race, Temperament } = require("../db");
 
 const router = Router();
 
@@ -9,13 +9,18 @@ router.get("/", (req, res, next) => {
 router.post("/", async (req, res, next) => {
   // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de raza de perro por body
   // Crea una raza de perro en la base de datos
-  let { name, height, weight, life_span } = req.body;
+  let { name, height, weight, life_span, image, temperament } = req.body;
   const newBreed = await Race.create({
     name,
     height,
     weight,
     life_span,
+    image_url: image,
   });
+  let temperamentsDB = await Temperament.findAll({
+    where: { name: temperament },
+  });
+  await newBreed.addTemperament(temperamentsDB);
   res.send(newBreed);
 });
 router.put("/", (req, res, next) => {
