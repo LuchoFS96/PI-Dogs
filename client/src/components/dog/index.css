@@ -1,0 +1,17 @@
+/* .dog {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 15px 15px;
+  background-color: #f0a500;
+  padding: 1.5rem;
+  height: 22rem;
+  border-radius: 1rem;
+  border: 3px solid #370665;
+} */
+/* .img {
+  background-size: contain;
+} */
+img {
+  height: 10rem;
+}

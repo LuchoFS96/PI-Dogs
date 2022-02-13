@@ -40,6 +40,7 @@ router.get("/", async (req, res, next) => {
       weight: breed.weight,
       life_span: breed.life_span,
       image_url: breed.image.url,
+      temperament: breed.temperament,
     };
   });
   let allBreeds = [...breedsDB, ...filteredBreeds];

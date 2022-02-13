@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { searchDog } from "../store/actions";
+import { searchDog } from "../../store/actions";
 
 export default function SearchBar() {
   const [search, setSearch] = useState("");
