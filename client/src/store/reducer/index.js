@@ -9,6 +9,7 @@ import {
   GET_API_DOGS,
   GET_DB_DOGS,
   HANDLE_ALPHABETIC_CHANGE,
+  HANDLE_WEIGHT_CHANGE,
   // ADD_TEMPERAMENT,
 } from "../actions";
 
@@ -87,7 +88,7 @@ export default function reducer(state = initialState, action) {
       };
 
     case HANDLE_ALPHABETIC_CHANGE:
-      let ordered = [...state.dogs].sort((a, b) => {
+      let orderedAlphabetic = [...state.dogs].sort((a, b) => {
         if (a.name < b.name) {
           return action.payload == "abc" ? -1 : 1;
         }
@@ -98,7 +99,47 @@ export default function reducer(state = initialState, action) {
       });
       return {
         ...state,
-        filteredDogs: [...ordered],
+        filteredDogs: [...orderedAlphabetic],
+      };
+
+    case HANDLE_WEIGHT_CHANGE:
+      // let orderedWeight = [...state.dogs].sort((a, b) => {
+      //   console.log(a.weight.metric.split(" - ").shift());
+
+      //   if (
+      //     a.weight.metric.split(" - ").shift() <
+      //     b.weight.metric.split(" - ").shift()
+      //   ) {
+      //     return action.payload == "-/+" ? -1 : 1;
+      //   }
+      //   if (
+      //     a.weight.metric.split(" - ").shift() >
+      //     b.weight.metric.split(" - ").shift()
+      //   ) {
+      //     return action.payload == "-/+" ? 1 : -1;
+      //   }
+      //   return 0;
+      // });
+      let orderedWeight = [...state.dogs];
+      if (action.payload === "-/+") {
+        orderedWeight.sort((a, b) => {
+          return (
+            parseInt(a.weight.metric.split(" - ").shift()) -
+            parseInt(b.weight.metric.split(" - ").shift())
+          );
+        });
+      }
+      if (action.payload === "+/-") {
+        orderedWeight.sort((a, b) => {
+          return (
+            parseInt(b.weight.metric.split(" - ").pop()) -
+            parseInt(a.weight.metric.split(" - ").pop())
+          );
+        });
+      }
+      return {
+        ...state,
+        filteredDogs: [...orderedWeight],
       };
 
     default:

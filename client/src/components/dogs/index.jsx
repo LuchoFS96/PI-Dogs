@@ -9,6 +9,7 @@ import {
   handleAlphabeticChange,
   handleDbChange,
   handleTemperamentChange,
+  handleWeightChange,
 } from "../../store/actions";
 import Dog from "../dog";
 import Temperament from "../temperaments";
@@ -37,6 +38,10 @@ export default function Dogs() {
 
   function handleAlphaChange(e) {
     dispatch(handleAlphabeticChange(e.target.value));
+  }
+
+  function handleWChange(e) {
+    dispatch(handleWeightChange(e.target.value));
   }
 
   return (
@@ -78,6 +83,13 @@ export default function Dogs() {
         <select onChange={(e) => handleAlphaChange(e)}>
           <option value="abc">A-Z</option>
           <option value="cba">Z-A</option>
+        </select>
+      </div>
+
+      <div className="weightOrder">
+        <select onChange={(e) => handleWChange(e)}>
+          <option value="-/+">Menor a Mayor</option>
+          <option value="+/-">Mayor a Menor</option>
         </select>
       </div>
 
