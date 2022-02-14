@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
+  getApiDogs,
+  getDbDogs,
   getDogs,
   getTemperaments,
   handleDbChange,
@@ -27,8 +29,9 @@ export default function Dogs() {
   }
 
   function handleChange(e) {
-    // if (e.target.value === "") dispatch(getDogs());
-    // else if (e.target.value === "api") dispatch(getApiDogs());
+    if (e.target.value === "") dispatch(getDogs());
+    else if (e.target.value === "api") dispatch(getApiDogs());
+    else if (e.target.value === "db") dispatch(getDbDogs());
   }
 
   return (
@@ -60,7 +63,7 @@ export default function Dogs() {
         </select>
       </div>
 
-      {dogs &&
+      {dogs ? (
         dogs.map((dog) => {
           return (
             <Dog
@@ -72,7 +75,10 @@ export default function Dogs() {
               weight={dog.weight}
             />
           );
-        })}
+        })
+      ) : (
+        <div>cargando</div>
+      )}
     </div>
   );
 }

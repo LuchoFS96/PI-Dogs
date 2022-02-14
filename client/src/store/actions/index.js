@@ -7,6 +7,8 @@ export const DB_CHANGE = "DB_CHANGE";
 export const CREATE_DOG = "CREATE_DOG";
 export const ADD_TEMPERAMENT = "ADD_TEMPERAMENT";
 export const GET_DOG_DETAIL = "GET_DOG_DETAIL";
+export const GET_API_DOGS = "GET_API_DOGS";
+export const GET_DB_DOGS = "GET_DB_DOGS";
 
 export function getDogs() {
   return function (dispatch) {
@@ -22,12 +24,11 @@ export function getDogs() {
   };
 }
 
-// export function getApiDogs(){
-//   return function (dispatch) {
-//     axios.get()
-//   }
-// }
-
+export function getApiDogs() {
+  return {
+    type: GET_API_DOGS,
+  };
+}
 export function getTemperaments() {
   return function (dispatch) {
     axios
@@ -100,5 +101,11 @@ export function getDogDetail(id) {
       type: GET_DOG_DETAIL,
       payload: dog.data,
     });
+  };
+}
+
+export function getDbDogs() {
+  return {
+    type: GET_DB_DOGS,
   };
 }

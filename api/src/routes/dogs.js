@@ -14,11 +14,11 @@ router.get("/", async (req, res, next) => {
   if (name) {
     breedsApi = { data: undefined };
     breedsDB = await Race.findAll({
-      // where: {
-      //   name: {
-      //     [Op.iLike]: "%" + name + "%",
-      //   },
-      // },
+      where: {
+        name: {
+          [Op.iLike]: "%" + name + "%",
+        },
+      },
       include: {
         model: Temperament,
       },

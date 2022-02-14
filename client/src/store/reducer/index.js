@@ -6,6 +6,8 @@ import {
   DB_CHANGE,
   CREATE_DOG,
   GET_DOG_DETAIL,
+  GET_API_DOGS,
+  GET_DB_DOGS,
   // ADD_TEMPERAMENT,
 } from "../actions";
 
@@ -67,6 +69,21 @@ export default function reducer(state = initialState, action) {
         filteredDogs: action.payload,
       };
 
+    case GET_API_DOGS:
+      return {
+        ...state,
+        filteredDogs: [...state.dogs].filter(
+          (dog) => typeof dog.id === "number"
+        ),
+      };
+
+    case GET_DB_DOGS:
+      return {
+        ...state,
+        filteredDogs: [...state.dogs].filter(
+          (dog) => typeof dog.id !== "number"
+        ),
+      };
     default:
       return {
         state,
