@@ -17,6 +17,7 @@ const initialState = {
   dogs: [],
   filteredDogs: [],
   temperaments: [],
+  detailDog: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -68,7 +69,7 @@ export default function reducer(state = initialState, action) {
     case GET_DOG_DETAIL:
       return {
         ...state,
-        filteredDogs: action.payload,
+        detailDog: action.payload,
       };
 
     case GET_API_DOGS:

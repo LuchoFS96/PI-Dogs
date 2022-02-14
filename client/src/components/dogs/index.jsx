@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -18,12 +18,13 @@ import "./index.css";
 export default function Dogs() {
   let dogs = useSelector((state) => state.filteredDogs);
   let temperaments = useSelector((state) => state.temperaments);
+
   let dispatch = useDispatch();
   useEffect(() => {
     dispatch(getDogs());
     dispatch(getTemperaments());
   }, [dispatch]);
-  console.log(dogs);
+
   let i = 0;
   function handleTempChange(e) {
     console.log(e.target.value);
@@ -46,6 +47,7 @@ export default function Dogs() {
 
   return (
     <div className="dogs">
+      {console.log(dogs)}
       <div className="temperaments">
         <select onChange={(e) => handleTempChange(e)}>
           <option value="">Select Temperament</option>
@@ -103,6 +105,7 @@ export default function Dogs() {
               temperament={dog.temperament}
               img={dog.image_url}
               weight={dog.weight}
+              height={dog.height}
             />
           );
         })

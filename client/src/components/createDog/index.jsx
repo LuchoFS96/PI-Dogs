@@ -15,7 +15,9 @@ export default function CreateDog(props) {
     temperaments: [],
   });
 
+  const [errors, setErrors] = useState({});
   let temperaments = useSelector((state) => state.temperaments);
+
   useEffect(() => {
     dispatch(getTemperaments());
   }, [dispatch]);
@@ -25,28 +27,59 @@ export default function CreateDog(props) {
       ...state,
       [e.target.name]: e.target.value,
     });
+    // setErrors(
+    //   validate({
+    //     ...state,
+    //     [e.target.name]: e.target.value,
+    //   })
+    // );
   }
 
   function handleSubmit(e) {
-    e.preventDefault();
-    const dog = {
-      name: e.target.name.value,
-      height: e.target.height.value,
-      weight: e.target.weight.value,
-      life_span: e.target.life_span.value,
-      image: e.target.image.value,
-      temperament: [...state.temperaments],
-    };
-    console.log(dog);
-    setState({
-      name: "",
-      height: "",
-      weight: "",
-      life_span: "",
-      image: "",
-      temperaments: [],
-    });
-    dispatch(createDog(dog));
+    if (
+      errors.name !== undefined ||
+      errors.height !== undefined ||
+      errors.weight !== undefined ||
+      errors.life_span !== undefined
+    ) {
+      e.preventDefault();
+      return alert("Sorry, all fields are required except image");
+    } else if (
+      state.name === "" ||
+      state.height === "" ||
+      state.weight === "" ||
+      state.life_span === ""
+    ) {
+      e.preventDefault();
+      return alert("Sorry, all fields are required except image");
+    } else if (
+      isNaN(parseInt(state.height)) ||
+      isNaN(parseInt(state.weight)) ||
+      isNaN(parseInt(state.life_span))
+    ) {
+      e.preventDefault();
+
+      return alert("Sorry, please fill out the required fields correctly");
+    } else {
+      const dog = {
+        name: e.target.name.value,
+        height: e.target.height.value,
+        weight: e.target.weight.value,
+        life_span: e.target.life_span.value,
+        image: e.target.image.value,
+        temperament: [...state.temperaments],
+      };
+      console.log(dog);
+      setState({
+        name: "",
+        height: "",
+        weight: "",
+        life_span: "",
+        image: "",
+        temperaments: [],
+      });
+      dispatch(createDog(dog));
+    }
   }
 
   function addTemp(e) {
@@ -55,6 +88,29 @@ export default function CreateDog(props) {
       ...state,
       temperaments: [...state.temperaments, e.target.value],
     });
+  }
+
+  function validate(input) {
+    let expresion = /^(?![ .]+$)[a-zA-Z .]*$/gm;
+    let errors = {};
+    if (!input.name) {
+      errors.name = "Name is missing";
+    } else if (expresion.test(input.name) === false) {
+      errors.name = "Name invalid";
+    } else if (!input.height) {
+      errors.height = "Min height is missing";
+    } else if (input.height <= 0) {
+      errors.height = "height cannot be negative or zero";
+    } else if (!input.weight) {
+      errors.weight = "Min weight is missing";
+    } else if (input.weight <= 0) {
+      errors.weight = "Weight can not be less";
+    } else if (!input.life_span) {
+      errors.life_span = "Min life is missing";
+    } else if (input.life_span <= 0) {
+      errors.life_span = "life years cannot be negative or zero";
+    }
+    return errors;
   }
 
   return (
