@@ -8,6 +8,7 @@ import {
   GET_DOG_DETAIL,
   GET_API_DOGS,
   GET_DB_DOGS,
+  HANDLE_ALPHABETIC_CHANGE,
   // ADD_TEMPERAMENT,
 } from "../actions";
 
@@ -84,6 +85,22 @@ export default function reducer(state = initialState, action) {
           (dog) => typeof dog.id !== "number"
         ),
       };
+
+    case HANDLE_ALPHABETIC_CHANGE:
+      let ordered = [...state.dogs].sort((a, b) => {
+        if (a.name < b.name) {
+          return action.payload == "abc" ? -1 : 1;
+        }
+        if (a.name > b.name) {
+          return action.payload == "abc" ? 1 : -1;
+        }
+        return 0;
+      });
+      return {
+        ...state,
+        filteredDogs: [...ordered],
+      };
+
     default:
       return {
         state,

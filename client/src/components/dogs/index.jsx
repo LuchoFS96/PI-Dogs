@@ -6,6 +6,7 @@ import {
   getDbDogs,
   getDogs,
   getTemperaments,
+  handleAlphabeticChange,
   handleDbChange,
   handleTemperamentChange,
 } from "../../store/actions";
@@ -22,7 +23,7 @@ export default function Dogs() {
     dispatch(getTemperaments());
   }, [dispatch]);
   console.log(dogs);
-
+  let i = 0;
   function handleTempChange(e) {
     console.log(e.target.value);
     dispatch(handleTemperamentChange(e.target.value));
@@ -32,6 +33,10 @@ export default function Dogs() {
     if (e.target.value === "") dispatch(getDogs());
     else if (e.target.value === "api") dispatch(getApiDogs());
     else if (e.target.value === "db") dispatch(getDbDogs());
+  }
+
+  function handleAlphaChange(e) {
+    dispatch(handleAlphabeticChange(e.target.value));
   }
 
   return (
@@ -44,7 +49,7 @@ export default function Dogs() {
               return (
                 <option
                   temperament={temperament}
-                  key={temperaments.indexOf(temperament)}
+                  key={i++}
                   id={temperaments.indexOf(temperament)}
                   value={temperament}
                 >
@@ -57,9 +62,22 @@ export default function Dogs() {
 
       <div className="races">
         <select onChange={(e) => handleChange(e)}>
-          <option value="">Both DB's</option>
-          <option value="api">Api</option>
-          <option value="db">Db</option>
+          <option value="" key={"both"}>
+            Both DB's
+          </option>
+          <option value="api" key={"api"}>
+            Api
+          </option>
+          <option value="db" key={"db"}>
+            Db
+          </option>
+        </select>
+      </div>
+
+      <div className="alphabeticOrder">
+        <select onChange={(e) => handleAlphaChange(e)}>
+          <option value="abc">A-Z</option>
+          <option value="cba">Z-A</option>
         </select>
       </div>
 

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function CreateDog(props) {
   let dispatch = useDispatch();
+  let i = 0;
   const [state, setState] = useState({
     name: "",
     height: "",
@@ -118,7 +119,7 @@ export default function CreateDog(props) {
                 return (
                   <option
                     temperament={temperament}
-                    key={temperaments.indexOf(temperament)}
+                    key={i++}
                     id={temperaments.indexOf(temperament)}
                     value={temperament}
                   >
