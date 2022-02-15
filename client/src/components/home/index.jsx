@@ -19,7 +19,7 @@ export default function Home() {
     <div className="Home">
       <SearchBar />
       <Link to="/create">Create</Link>
-      <Dogs dogsFilter={dogsFilter} />
+      {dogsFilter ? <Dogs dogsFilter={dogsFilter} /> : <div></div>}
     </div>
   );
 }

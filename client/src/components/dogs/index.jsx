@@ -16,23 +16,22 @@ import Dog from "../dog";
 import "./index.css";
 
 export default function Dogs({ dogsFilter }) {
-  let dogs = useSelector((state) => state.filteredDogs);
+  // let dogs = useSelector((state) => state.filteredDogs);
   // let temperaments = useSelector((state) => state.temperaments);
   // let pagesTotal = useSelector((state) => state.pagesTotal);
 
-  // const [pagesTotal, setTotalPages] = useState(0);
+  const [dogs, setDogs] = useState([]);
+  const [pagesTotal, setTotalPages] = useState(0);
   // const [auxDogs, setDogs] = useState([]);
-  // const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   let dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDogs());
-    // dispatch(getTemperaments());
-    // setTotalPages(Math.floor(dogsFilter.length / 8));
-  }, [dispatch]);
-
-  // console.log(pagesTotal);
+    setDogs([...dogsFilter].splice(0, 8));
+    setCurrentPage(0);
+    setTotalPages(Math.floor(dogsFilter.length / 8));
+  }, [dogsFilter]);
 
   // let i = 0;
   // function handleTempChange(e) {
@@ -55,22 +54,22 @@ export default function Dogs({ dogsFilter }) {
   // }
   // console.log(auxDogs);
 
-  // function HandleForwad() {
-  //   const totalElementos = dogsFilter.length;
-  //   const nextPage = currentPage + 1;
-  //   const firstIndex = nextPage * 8;
-  //   if (firstIndex > totalElementos) return;
-  //   setCurrentPage(nextPage);
-  //   setDogs([...dogsFilter].splice(firstIndex, 8));
-  // }
+  function HandleForwad() {
+    const totalElementos = dogsFilter.length;
+    const nextPage = currentPage + 1;
+    const firstIndex = nextPage * 8;
+    if (firstIndex > totalElementos) return;
+    setCurrentPage(nextPage);
+    setDogs([...dogsFilter].splice(firstIndex, 8));
+  }
 
-  // function HandleBack() {
-  //   const prevPage = currentPage - 1;
-  //   if (prevPage < 0) return;
-  //   const firstIndex = prevPage * 8;
-  //   setCurrentPage(prevPage);
-  //   setDogs([...dogsFilter].splice(firstIndex, 8));
-  // }
+  function HandleBack() {
+    const prevPage = currentPage - 1;
+    if (prevPage < 0) return;
+    const firstIndex = prevPage * 8;
+    setCurrentPage(prevPage);
+    setDogs([...dogsFilter].splice(firstIndex, 8));
+  }
 
   return (
     <div className="dogs">
@@ -139,11 +138,12 @@ export default function Dogs({ dogsFilter }) {
       ) : (
         <div>cargando</div>
       )}
-      {/* <div className="pagination">
+
+      <div className="pagination">
         <button onClick={() => HandleBack()}> Back </button>
         <span>{`${currentPage + 1} of ${pagesTotal + 1}`}</span>
         <button onClick={() => HandleForwad()}> Forwad </button>
-      </div> */}
+      </div>
     </div>
   );
 }
