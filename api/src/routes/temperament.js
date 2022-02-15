@@ -1,6 +1,7 @@
 const axios = require("axios");
 const { Router } = require("express");
 const { Temperament } = require("../db");
+const { API_KEY } = process.env;
 
 const router = Router();
 
@@ -19,7 +20,9 @@ router.get("/", async (req, res, next) => {
       }
       res.send(finalTemperamentsDB);
     } else {
-      let api = await axios.get("https://api.thedogapi.com/v1/breeds");
+      let api = await axios.get(
+        `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
+      );
       let filteredTemperamentsApi = api.data.map((data) => {
         return {
           name: data.temperament,

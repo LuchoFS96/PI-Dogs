@@ -10,6 +10,7 @@ import {
   GET_DB_DOGS,
   HANDLE_ALPHABETIC_CHANGE,
   HANDLE_WEIGHT_CHANGE,
+  // SET_PAGES,
   // ADD_TEMPERAMENT,
 } from "../actions";
 
@@ -18,6 +19,7 @@ const initialState = {
   filteredDogs: [],
   temperaments: [],
   detailDog: [],
+  pagesTotal: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -26,7 +28,9 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         dogs: action.payload.data,
+        // filteredDogs: [...action.payload.data].splice(0, 8),
         filteredDogs: action.payload.data,
+        pagesTotal: Math.floor(action.payload.data.length / 8),
       };
     case GET_TEMPERAMENTS:
       return {
@@ -143,6 +147,12 @@ export default function reducer(state = initialState, action) {
         filteredDogs: [...orderedWeight],
       };
 
+    // case SET_PAGES:
+    //   return {
+    //     ...state,
+    //     pages: Math.floor(action.payload.length / 8),
+    //     // Math.floor(dogsFilter.length / 8
+    //   };
     default:
       return {
         state,

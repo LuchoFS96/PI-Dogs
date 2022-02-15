@@ -11,6 +11,7 @@ export const GET_API_DOGS = "GET_API_DOGS";
 export const GET_DB_DOGS = "GET_DB_DOGS";
 export const HANDLE_ALPHABETIC_CHANGE = "HANDLE_ALPHABETIC_CHANGE";
 export const HANDLE_WEIGHT_CHANGE = "HANDLE_WEIGHT_CHANGE";
+export const SET_PAGES = "SET_PAGES";
 
 export function getDogs() {
   return function (dispatch) {
@@ -125,3 +126,10 @@ export function handleWeightChange(order) {
     payload: order,
   };
 }
+
+// export function setPages(dogsFilter) {
+//   return {
+//     type: SET_PAGES,
+//     payload: dogsFilter,
+//   };
+// }

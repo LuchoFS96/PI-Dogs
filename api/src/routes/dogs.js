@@ -2,6 +2,7 @@ const { Router, response } = require("express");
 const { Race, Temperament } = require("../db");
 const { Op } = require("sequelize");
 const axios = require("axios");
+const { API_KEY } = process.env;
 
 const router = Router();
 
@@ -27,7 +28,9 @@ router.get("/", async (req, res, next) => {
       `https://api.thedogapi.com/v1/breeds/search?q=${name}`
     );
 
-    helper1 = await axios.get(`https://api.thedogapi.com/v1/breeds`);
+    helper1 = await axios.get(
+      `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
+    );
     breedsApi.data = helper1.data.filter((e) =>
       e.name.toLowerCase().includes(name.toLowerCase())
     );
@@ -37,7 +40,9 @@ router.get("/", async (req, res, next) => {
         model: Temperament,
       },
     });
-    breedsApi = await axios.get("https://api.thedogapi.com/v1/breeds");
+    breedsApi = await axios.get(
+      `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
+    );
   }
   let filteredBreeds = breedsApi.data.map((breed) => {
     return {
@@ -60,7 +65,9 @@ router.get("/:id", async (req, res, next) => {
   // Incluir los temperamentos asociados
   let { id } = req.params;
   let breedsDB = await Race.findAll();
-  let breedsApi = await axios.get("https://api.thedogapi.com/v1/breeds");
+  let breedsApi = await axios.get(
+    `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
+  );
   let filteredBreeds = breedsApi.data.map((breed) => {
     return {
       id: breed.id,

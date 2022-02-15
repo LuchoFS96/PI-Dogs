@@ -1,14 +1,25 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getDogs } from "../../store/actions";
 import CreateDog from "../createDog";
 import Dogs from "../dogs";
 import SearchBar from "../searchBar";
 
 export default function Home() {
+  const dogsFilter = useSelector((state) => state.filteredDogs);
+
+  let dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getDogs());
+  }, [dispatch]);
+
   return (
     <div className="Home">
       <SearchBar />
       <Link to="/create">Create</Link>
-      <Dogs />
+      <Dogs dogsFilter={dogsFilter} />
     </div>
   );
 }
