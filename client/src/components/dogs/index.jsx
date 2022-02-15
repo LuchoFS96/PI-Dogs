@@ -72,7 +72,7 @@ export default function Dogs({ dogsFilter }) {
   }
 
   return (
-    <div className="dogs">
+    <div className="container">
       {/* {console.log(dogs)} */}
       {/* <div className="temperaments">
         <select onChange={(e) => handleTempChange(e)}>
@@ -120,7 +120,6 @@ export default function Dogs({ dogsFilter }) {
           <option value="+/-">Mayor a Menor</option>
         </select>
       </div> */}
-
       {dogs ? (
         dogs.map((dog) => {
           return (

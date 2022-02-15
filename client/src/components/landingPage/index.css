@@ -1,0 +1,42 @@
+/* .landingPageImage {
+
+  max-width: 100%;
+  max-height: 100vh;
+  margin: auto;
+}
+
+.landingPage {
+  display: grid;
+  height: 100%;
+}
+* {
+  margin: 0;
+  padding: 0;
+} */
+
+.landingPage {
+  display: grid;
+  background-image: url(https://img3.wallspic.com/originals/9/4/1/7/5/157149-wolf-water-dog-carnivore-dog_breed-1920x1080.jpg);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-size: cover;
+  background-position: 33% 22%;
+
+  grid-template-columns: auto auto auto auto auto;
+
+  grid-template-rows: 100%;
+}
+
+.landingPageText {
+  /* display: flex;
+  height: 100%;
+  width: 85%;
+  justify-content: flex-end; */
+  /* display: grid; */
+
+  background-color: rgba(170, 241, 245, 0.459);
+
+  padding: 66% 0;
+  font-size: 30px;
+}

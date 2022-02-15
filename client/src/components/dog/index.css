@@ -1,17 +1,28 @@
-/* .dog {
+img {
+  height: 10em;
+}
+
+/* .container {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 1fr);
-  gap: 15px 15px;
-  background-color: #f0a500;
-  padding: 1.5rem;
+
+  background-color: #ffffff;
   height: 22rem;
   border-radius: 1rem;
   border: 3px solid #370665;
+}
+.container.text {
+}
+.container.img {
+  width: 100%;
 } */
-/* .img {
-  background-size: contain;
-} */
-img {
-  height: 10rem;
+
+.container2 {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  border-radius: 1rem;
+  border: 3px solid rgb(172, 95, 95);
+}
+
+.container.img {
 }

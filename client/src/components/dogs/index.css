@@ -1,5 +1,10 @@
-/* .dogs {
+/* .container.dogs {
   display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: 0.7fr 0.7fr;
   gap: 14px 14px;
-  grid-auto-flow: row;
 } */
+.container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
