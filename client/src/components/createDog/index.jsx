@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { createDog, getTemperaments } from "../../store/actions";
 import { Link } from "react-router-dom";
+import "./index.css";
 
 export default function CreateDog(props) {
   let dispatch = useDispatch();
@@ -115,10 +116,11 @@ export default function CreateDog(props) {
 
   return (
     <div className="createDog">
-      <h1>Create Doggo!</h1>
-      <div className="form">
+      <div className="create-dog-form">
+        <h1>Create Doggo!</h1>
         <form onSubmit={(e) => handleSubmit(e)}>
           <label>Name</label>
+          <br />
           <input
             type="text"
             name="name"
@@ -129,6 +131,7 @@ export default function CreateDog(props) {
           <br />
 
           <label>Height</label>
+          <br />
           <input
             type="text"
             name="height"
@@ -139,6 +142,7 @@ export default function CreateDog(props) {
           <br />
 
           <label>Weight</label>
+          <br />
           <input
             type="text"
             name="weight"
@@ -149,6 +153,7 @@ export default function CreateDog(props) {
           <br />
 
           <label>Life Span</label>
+          <br />
           <input
             type="text"
             name="life_span"
@@ -159,17 +164,20 @@ export default function CreateDog(props) {
           <br />
 
           <label>Image</label>
+          <br />
           <input
             type="text"
             name="image"
             value={state.image}
             onChange={(e) => handleChange(e)}
           ></input>
+          <br />
 
           <br />
 
           <select onChange={(e) => addTemp(e)}>
             <option value="">Select Temperament</option>
+            <br />
             {temperaments &&
               temperaments.map((temperament) => {
                 return (
@@ -186,10 +194,11 @@ export default function CreateDog(props) {
           </select>
           <input type="submit" value="send"></input>
         </form>
+        <br />
+        <Link to="/home">
+          <button className="button">Go Back</button>
+        </Link>
       </div>
-
-      <br />
-      <Link to="/home">Go Back</Link>
     </div>
   );
 }

@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import "./index.css";
 export default function Dog(props) {
   return (
-    <div className="container2">
-      <div className="container.text">
-        <h5>{props.id}</h5>
+    <div className="container-dog">
+      <div className="container-text">
+        {/* <h5>{props.id}</h5> */}
         <Link key={props.id} to={`/home/${props.id}`}>
           <h3>{props.name}</h3>
         </Link>
@@ -12,7 +12,7 @@ export default function Dog(props) {
         <p>{props.weight.metric ? props.weight.metric : props.weight} kg</p>
         <p>{props.height.metric ? props.height.metric : props.height} cm</p>
       </div>
-      <div className="container.img">
+      <div className="container-img">
         <img
           src={
             props.img

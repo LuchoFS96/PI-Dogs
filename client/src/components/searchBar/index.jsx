@@ -10,6 +10,8 @@ import {
   handleWeightChange,
   searchDog,
 } from "../../store/actions";
+import "./index.css";
+import { Link } from "react-router-dom";
 
 export default function SearchBar() {
   const [search, setSearch] = useState("");
@@ -52,60 +54,81 @@ export default function SearchBar() {
   }
 
   return (
-    <div className="filters">
-      <div className="SearchBar">
-        <form onSubmit={onSubmit}>
-          <input type="text" onChange={onInputChange} value={search} />
-          <input type="submit" value="Buscar" />
-        </form>
-      </div>
-
-      <div className="temperaments">
-        <select onChange={(e) => handleTempChange(e)}>
-          <option value="">Select Temperament</option>
-          {temperaments &&
-            temperaments.map((temperament) => {
-              return (
-                <option
-                  temperament={temperament}
-                  key={i++}
-                  id={temperaments.indexOf(temperament)}
-                  value={temperament}
-                >
-                  {temperament}
+    <div className="navbar">
+      <nav>
+        <ul>
+          <li>
+            <div className="navbar-search-bar">
+              <form onSubmit={onSubmit}>
+                <input
+                  type="text"
+                  onChange={onInputChange}
+                  value={search}
+                  placeholder="Search Doggo"
+                />
+                <input type="submit" value="Buscar" />
+              </form>
+            </div>
+          </li>
+          <li>
+            <div className="navbar-temperaments">
+              <select onChange={(e) => handleTempChange(e)}>
+                <option value="">Select Temperament</option>
+                {temperaments &&
+                  temperaments.map((temperament) => {
+                    return (
+                      <option
+                        temperament={temperament}
+                        key={i++}
+                        id={temperaments.indexOf(temperament)}
+                        value={temperament}
+                      >
+                        {temperament}
+                      </option>
+                    );
+                  })}
+              </select>
+            </div>
+          </li>
+          <li>
+            <div className="navbar-races">
+              <select onChange={(e) => handleChange(e)}>
+                <option value="" key={"both"}>
+                  Both DB's
                 </option>
-              );
-            })}
-        </select>
-      </div>
-
-      <div className="races">
-        <select onChange={(e) => handleChange(e)}>
-          <option value="" key={"both"}>
-            Both DB's
-          </option>
-          <option value="api" key={"api"}>
-            Api
-          </option>
-          <option value="db" key={"db"}>
-            Db
-          </option>
-        </select>
-      </div>
-
-      <div className="alphabeticOrder">
-        <select onChange={(e) => handleAlphaChange(e)}>
-          <option value="abc">A-Z</option>
-          <option value="cba">Z-A</option>
-        </select>
-      </div>
-
-      <div className="weightOrder">
-        <select onChange={(e) => handleWChange(e)}>
-          <option value="-/+">Menor a Mayor</option>
-          <option value="+/-">Mayor a Menor</option>
-        </select>
-      </div>
+                <option value="api" key={"api"}>
+                  Api
+                </option>
+                <option value="db" key={"db"}>
+                  Db
+                </option>
+              </select>
+            </div>
+          </li>
+          <li>
+            <div className="navbar-alphabetic-order">
+              <select onChange={(e) => handleAlphaChange(e)}>
+                <option value="abc">A-Z</option>
+                <option value="cba">Z-A</option>
+              </select>
+            </div>
+          </li>
+          <li>
+            <div className="navbar-weight-order">
+              <select onChange={(e) => handleWChange(e)}>
+                <option value="-/+">Menor a Mayor</option>
+                <option value="+/-">Mayor a Menor</option>
+              </select>
+            </div>
+          </li>
+          <li className="navbar-create">
+            <Link to="/create">
+              <button className="button">Create</button>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+      <div className="clearfix"></div>
     </div>
   );
 }

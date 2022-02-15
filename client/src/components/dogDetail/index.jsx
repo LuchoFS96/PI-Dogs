@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { getDogDetail } from "../../store/actions";
 import { Link } from "react-router-dom";
+import "./index.css";
 
 export default function DogDetail() {
   let { id } = useParams();
@@ -27,19 +28,25 @@ export default function DogDetail() {
   return (
     <div>
       {dog ? (
-        <div>
+        <div className="dog-detail">
+          <h1>ID: {dog.id}</h1>
           <h1>{dog.name}</h1> {console.log(dog)}
           <img src={dog.image} alt={`${dog.name}_image`} />
-          <h3>{dog.height.metric}</h3>
-          <h3>{dog.weight.metric}</h3>
-          <h3>{dog.life_span}</h3>
-          <h3>{dog.temperament}</h3> <br />
-          <Link to="/home">
-            <h3>Go Back</h3>
+          <h3>Height: {dog.height.metric}</h3>
+          <h3>Weight: {dog.weight.metric} kg</h3>
+          <h3>Life Span: {dog.life_span}</h3>
+          <h3>Temperaments {dog.temperament}</h3> <br />
+          <Link to="/home" style={{ textDecoration: "none" }}>
+            <button className="button">Go Back</button>
           </Link>
         </div>
       ) : (
-        <div>'loading'</div>
+        <div>
+          <img
+            src="https://assets.materialup.com/uploads/a7e6009b-6d69-4569-b1ee-0e01b234f2a1/preview.gif"
+            alt="gif"
+          ></img>
+        </div>
       )}
     </div>
   );

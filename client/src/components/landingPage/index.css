@@ -37,6 +37,21 @@
 
   background-color: rgba(170, 241, 245, 0.459);
 
-  padding: 66% 0;
+  padding: 80% 0;
   font-size: 30px;
+}
+.button2 {
+  position: relative;
+  background-color: #3d95b8;
+  border: none;
+  font-size: 28px;
+  color: #ffffff;
+  padding: 10px;
+  width: 200px;
+  text-align: center;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 15px;
 }

@@ -120,28 +120,30 @@ export default function Dogs({ dogsFilter }) {
           <option value="+/-">Mayor a Menor</option>
         </select>
       </div> */}
-      {dogs ? (
-        dogs.map((dog) => {
-          return (
-            <Dog
-              key={dog.id}
-              id={dog.id}
-              name={dog.name}
-              temperament={dog.temperament}
-              img={dog.image_url}
-              weight={dog.weight}
-              height={dog.height}
-            />
-          );
-        })
-      ) : (
-        <div>cargando</div>
-      )}
+      <div className="container-dogs">
+        {dogs ? (
+          dogs.map((dog) => {
+            return (
+              <Dog
+                key={dog.id}
+                id={dog.id}
+                name={dog.name}
+                temperament={dog.temperament}
+                img={dog.image_url}
+                weight={dog.weight}
+                height={dog.height}
+              />
+            );
+          })
+        ) : (
+          <div>cargando</div>
+        )}
+      </div>
 
       <div className="pagination">
         <button onClick={() => HandleBack()}> Back </button>
         <span>{`${currentPage + 1} of ${pagesTotal + 1}`}</span>
-        <button onClick={() => HandleForwad()}> Forwad </button>
+        <button onClick={() => HandleForwad()}> Forward </button>
       </div>
     </div>
   );

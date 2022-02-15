@@ -14,7 +14,9 @@ export default function LandingPage() {
       <div></div>
       <div></div>
       <div className="landingPageText">
-        <Link to="/home">Let's go see some dogs!</Link>
+        <Link to="/home">
+          <button className="button2">Let's go see some dogs!</button>
+        </Link>
       </div>
     </div>
   );
