@@ -53,10 +53,18 @@ export default function reducer(state = initialState, action) {
       let auxDogs = state.dogs.filter(
         (e) => e.temperament && e.temperament.includes(temperament)
       );
-
+      let auxDogsDb = [...state.dogs].filter(
+        (dog) => typeof dog.id !== "number"
+      );
+      let auxDogsDb2 = [];
+      auxDogsDb.forEach((dog) =>
+        dog.temperaments.forEach((temp) => {
+          if (temp.name === temperament) auxDogsDb2.push(dog);
+        })
+      );
       return {
         ...state,
-        filteredDogs: auxDogs,
+        filteredDogs: [...auxDogs, ...auxDogsDb2],
       };
     case DB_CHANGE:
       let db = action.payload;
