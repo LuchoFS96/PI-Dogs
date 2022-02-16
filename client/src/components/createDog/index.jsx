@@ -9,9 +9,12 @@ export default function CreateDog(props) {
   let i = 0;
   const [state, setState] = useState({
     name: "",
-    height: "",
-    weight: "",
-    life_span: "",
+    min_height: "",
+    max_height: "",
+    min_weight: "",
+    max_weight: "",
+    min_life_span: "",
+    max_life_span: "",
     image: "",
     temperaments: [],
   });
@@ -37,50 +40,56 @@ export default function CreateDog(props) {
   }
 
   function handleSubmit(e) {
-    if (
-      errors.name !== undefined ||
-      errors.height !== undefined ||
-      errors.weight !== undefined ||
-      errors.life_span !== undefined
-    ) {
-      e.preventDefault();
-      return alert("Sorry, all fields are required except image");
-    } else if (
-      state.name === "" ||
-      state.height === "" ||
-      state.weight === "" ||
-      state.life_span === ""
-    ) {
-      e.preventDefault();
-      return alert("Sorry, all fields are required except image");
-    } else if (
-      isNaN(parseInt(state.height)) ||
-      isNaN(parseInt(state.weight)) ||
-      isNaN(parseInt(state.life_span))
-    ) {
-      e.preventDefault();
+    // if (
+    //   errors.name !== undefined ||
+    //   errors.height !== undefined ||
+    //   errors.weight !== undefined ||
+    //   errors.life_span !== undefined
+    // ) {
+    //   e.preventDefault();
+    //   return alert("Sorry, all fields are required except image");
+    // } else if (
+    //   state.name === "" ||
+    //   state.height === "" ||
+    //   state.weight === "" ||
+    //   state.life_span === ""
+    // ) {
+    //   e.preventDefault();
+    //   return alert("Sorry, all fields are required except image");
+    // } else if (
+    //   isNaN(parseInt(state.height)) ||
+    //   isNaN(parseInt(state.weight)) ||
+    //   isNaN(parseInt(state.life_span))
+    // ) {
+    //   e.preventDefault();
 
-      return alert("Sorry, please fill out the required fields correctly");
-    } else {
-      const dog = {
-        name: e.target.name.value,
-        height: e.target.height.value,
-        weight: e.target.weight.value,
-        life_span: e.target.life_span.value,
-        image: e.target.image.value,
-        temperament: [...state.temperaments],
-      };
-      console.log(dog);
-      setState({
-        name: "",
-        height: "",
-        weight: "",
-        life_span: "",
-        image: "",
-        temperaments: [],
-      });
-      dispatch(createDog(dog));
-    }
+    //   return alert("Sorry, please fill out the required fields correctly");
+    // } else {
+    const dog = {
+      name: state.name,
+      height: `${state.min_height} - ${state.max_height}`,
+      weight: `${state.min_weight} - ${state.max_weight}`,
+      life_span: `${state.min_life_span} - ${state.max_life_span}`,
+      image:
+        state.image !== ""
+          ? state.image
+          : "https://previews.123rf.com/images/red33/red331112/red33111200014/11546849-skizzieren-sie-doodle-crazy-verr%C3%BCckt-puppy-dog-vektor-illustration.jpg",
+      temperament: [...state.temperaments],
+    };
+    console.log(dog);
+    setState({
+      name: "",
+      min_height: "",
+      max_height: "",
+      min_weight: "",
+      max_weight: "",
+      min_life_span: "",
+      max_life_span: "",
+      image: "",
+      temperaments: [],
+    });
+    dispatch(createDog(dog));
+    // }
   }
 
   function addTemp(e) {
@@ -130,34 +139,67 @@ export default function CreateDog(props) {
 
           <br />
 
-          <label>Height</label>
+          <label>Min Height</label>
           <br />
           <input
             type="text"
-            name="height"
-            value={state.height}
+            name="min_height"
+            value={state.min_height}
             onChange={(e) => handleChange(e)}
           ></input>
 
           <br />
 
-          <label>Weight</label>
+          <label> Max Height</label>
           <br />
           <input
             type="text"
-            name="weight"
-            value={state.weight}
+            name="max_height"
+            value={state.max_height}
             onChange={(e) => handleChange(e)}
           ></input>
 
           <br />
 
-          <label>Life Span</label>
+          <label>Min Weight</label>
           <br />
           <input
             type="text"
-            name="life_span"
-            value={state.life_span}
+            name="min_weight"
+            value={state.min_weight}
+            onChange={(e) => handleChange(e)}
+          ></input>
+
+          <br />
+
+          <label>Max Weight</label>
+          <br />
+          <input
+            type="text"
+            name="max_weight"
+            value={state.max_weight}
+            onChange={(e) => handleChange(e)}
+          ></input>
+
+          <br />
+
+          <label>Min Life Span</label>
+          <br />
+          <input
+            type="text"
+            name="min_life_span"
+            value={state.min_life_span}
+            onChange={(e) => handleChange(e)}
+          ></input>
+
+          <br />
+
+          <label>Max Life Span</label>
+          <br />
+          <input
+            type="text"
+            name="max_life_span"
+            value={state.max_life_span}
             onChange={(e) => handleChange(e)}
           ></input>
 

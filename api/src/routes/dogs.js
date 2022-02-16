@@ -64,7 +64,9 @@ router.get("/:id", async (req, res, next) => {
   // Debe traer solo los datos pedidos en la ruta de detalle de raza de perro
   // Incluir los temperamentos asociados
   let { id } = req.params;
-  let breedsDB = await Race.findAll();
+  let breedsDB = await Race.findAll({
+    include: Temperament,
+  });
   let breedsApi = await axios.get(
     `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
   );

@@ -70,7 +70,6 @@ export default function Dogs({ dogsFilter }) {
     setCurrentPage(prevPage);
     setDogs([...dogsFilter].splice(firstIndex, 8));
   }
-
   return (
     <div className="container">
       {/* {console.log(dogs)} */}
@@ -106,7 +105,6 @@ export default function Dogs({ dogsFilter }) {
           </option>
         </select>
       </div> */}
-
       {/* <div className="alphabeticOrder">
         <select onChange={(e) => handleAlphaChange(e)}>
           <option value="abc">A-Z</option>
@@ -128,7 +126,17 @@ export default function Dogs({ dogsFilter }) {
                 key={dog.id}
                 id={dog.id}
                 name={dog.name}
-                temperament={dog.temperament}
+                temperament={
+                  dog.temperament ? (
+                    dog.temperament
+                  ) : dog.temperaments ? (
+                    dog.temperaments.map(
+                      (temperament) => temperament.name + " "
+                    )
+                  ) : (
+                    <></>
+                  )
+                }
                 img={dog.image_url}
                 weight={dog.weight}
                 height={dog.height}

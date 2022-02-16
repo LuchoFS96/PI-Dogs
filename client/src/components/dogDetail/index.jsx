@@ -31,11 +31,22 @@ export default function DogDetail() {
         <div className="dog-detail">
           <h1>ID: {dog.id}</h1>
           <h1>{dog.name}</h1> {console.log(dog)}
-          <img src={dog.image} alt={`${dog.name}_image`} />
-          <h3>Height: {dog.height.metric}</h3>
-          <h3>Weight: {dog.weight.metric} kg</h3>
+          <img
+            src={dog.image ? dog.image : dog.image_url}
+            alt={`${dog.name}_image`}
+          />
+          <h3>Height: {dog.height.metric ? dog.height.metric : dog.height}</h3>
+          <h3>
+            Weight: {dog.weight.metric ? dog.weight.metric : dog.weight} kg
+          </h3>
           <h3>Life Span: {dog.life_span}</h3>
-          <h3>Temperaments {dog.temperament}</h3> <br />
+          <h3>
+            Temperaments{" "}
+            {dog.temperament
+              ? dog.temperament
+              : dog.temperaments.map((temperament) => temperament.name + " ")}
+          </h3>{" "}
+          <br />
           <Link to="/home" style={{ textDecoration: "none" }}>
             <button className="button">Go Back</button>
           </Link>

@@ -128,17 +128,21 @@ export default function reducer(state = initialState, action) {
       let orderedWeight = [...state.dogs];
       if (action.payload === "-/+") {
         orderedWeight.sort((a, b) => {
+          if (a.name === "Olde English Bulldogge") a.weight.metric = 27;
+          else if (b.name === "Olde English Bulldogge") b.weight.metric = 27;
           return (
-            parseInt(a.weight.metric.split(" - ").shift()) -
-            parseInt(b.weight.metric.split(" - ").shift())
+            parseInt(a.weight.metric ? a.weight.metric : a.weight) -
+            parseInt(b.weight.metric ? b.weight.metric : b.weight)
           );
         });
       }
       if (action.payload === "+/-") {
         orderedWeight.sort((a, b) => {
+          if (a.name === "Olde English Bulldogge") a.weight.metric = 27;
+          else if (b.name === "Olde English Bulldogge") b.weight.metric = 27;
           return (
-            parseInt(b.weight.metric.split(" - ").pop()) -
-            parseInt(a.weight.metric.split(" - ").pop())
+            parseInt(b.weight.metric ? b.weight.metric : b.weight) -
+            parseInt(a.weight.metric ? a.weight.metric : a.weight)
           );
         });
       }

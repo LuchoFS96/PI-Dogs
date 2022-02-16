@@ -36,7 +36,8 @@ export default function SearchBar() {
 
   function handleTempChange(e) {
     console.log(e.target.value);
-    dispatch(handleTemperamentChange(e.target.value));
+    if (e.target.value === "") dispatch(getDogs());
+    else dispatch(handleTemperamentChange(e.target.value));
   }
 
   function handleChange(e) {
@@ -46,11 +47,19 @@ export default function SearchBar() {
   }
 
   function handleAlphaChange(e) {
-    dispatch(handleAlphabeticChange(e.target.value));
+    if (e.target.value !== "") {
+      dispatch(handleAlphabeticChange(e.target.value));
+    } else {
+      dispatch(getDogs());
+    }
   }
 
   function handleWChange(e) {
-    dispatch(handleWeightChange(e.target.value));
+    if (e.target.value !== "") {
+      dispatch(handleWeightChange(e.target.value));
+    } else {
+      dispatch(getDogs());
+    }
   }
 
   return (
@@ -93,7 +102,7 @@ export default function SearchBar() {
           <li>
             <div className="navbar-races">
               <select onChange={(e) => handleChange(e)}>
-                <option value="" key={"both"}>
+                <option value="" key={"bothDB"}>
                   Both DB's
                 </option>
                 <option value="api" key={"api"}>
@@ -108,14 +117,24 @@ export default function SearchBar() {
           <li>
             <div className="navbar-alphabetic-order">
               <select onChange={(e) => handleAlphaChange(e)}>
-                <option value="abc">A-Z</option>
-                <option value="cba">Z-A</option>
+                <option value="" key={"bothAlph"}>
+                  Without Alphabetic Order
+                </option>
+                <option value="abc" key={"abc"}>
+                  A-Z
+                </option>
+                <option value="cba" key={"cba"}>
+                  Z-A
+                </option>
               </select>
             </div>
           </li>
           <li>
             <div className="navbar-weight-order">
               <select onChange={(e) => handleWChange(e)}>
+                <option value="" key={"bothWeight"}>
+                  Without Weight Order
+                </option>
                 <option value="-/+">Menor a Mayor</option>
                 <option value="+/-">Mayor a Menor</option>
               </select>
