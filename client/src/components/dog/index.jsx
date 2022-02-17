@@ -11,6 +11,9 @@ export default function Dog(props) {
         <p>{props.temperament}</p>
         <p>{props.weight.metric ? props.weight.metric : props.weight} kg</p>
         <p>{props.height.metric ? props.height.metric : props.height} cm</p>
+        <p>
+          {props.life_span} {props.id.length > 5 ? "years" : <></>}
+        </p>
       </div>
       <div className="container-img">
         <img

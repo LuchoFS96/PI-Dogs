@@ -3,7 +3,7 @@ import {
   SEARCH_DOG,
   GET_TEMPERAMENTS,
   TEMPERAMENT_CHANGE,
-  DB_CHANGE,
+  // DB_CHANGE,
   CREATE_DOG,
   GET_DOG_DETAIL,
   GET_API_DOGS,
@@ -21,7 +21,6 @@ const initialState = {
   detailDog: [],
   pagesTotal: [],
 };
-
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_DOGS:
@@ -66,8 +65,8 @@ export default function reducer(state = initialState, action) {
         ...state,
         filteredDogs: [...auxDogs, ...auxDogsDb2],
       };
-    case DB_CHANGE:
-      let db = action.payload;
+    // case DB_CHANGE:
+    // let db = action.payload;
 
     // if (db === "") {
 
@@ -103,10 +102,10 @@ export default function reducer(state = initialState, action) {
     case HANDLE_ALPHABETIC_CHANGE:
       let orderedAlphabetic = [...state.dogs].sort((a, b) => {
         if (a.name < b.name) {
-          return action.payload == "abc" ? -1 : 1;
+          return action.payload === "abc" ? -1 : 1;
         }
         if (a.name > b.name) {
-          return action.payload == "abc" ? 1 : -1;
+          return action.payload === "abc" ? 1 : -1;
         }
         return 0;
       });
@@ -165,6 +164,7 @@ export default function reducer(state = initialState, action) {
     //     pages: Math.floor(action.payload.length / 8),
     //     // Math.floor(dogsFilter.length / 8
     //   };
+
     default:
       return {
         state,

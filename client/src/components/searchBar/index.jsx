@@ -140,6 +140,7 @@ export default function SearchBar() {
               </select>
             </div>
           </li>
+
           <li className="navbar-create">
             <Link to="/create">
               <button className="button">Create</button>

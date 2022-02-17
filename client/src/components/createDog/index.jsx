@@ -258,7 +258,7 @@ export default function CreateDog(props) {
 
           <select onChange={(e) => addTemp(e)}>
             <option value="">Select Temperament</option>
-            <br />
+            {/* <br /> */}
             {temperaments &&
               temperaments.map((temperament) => {
                 return (

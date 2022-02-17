@@ -56,7 +56,7 @@ router.get("/", async (req, res, next) => {
     };
   });
   let allBreeds = [...breedsDB, ...filteredBreeds];
-  res.send(allBreeds);
+  res.status(200).send(allBreeds);
 });
 
 router.get("/:id", async (req, res, next) => {
@@ -91,7 +91,7 @@ router.get("/:id", async (req, res, next) => {
   if (Object.keys(finalBreed).length === 0) {
     res.send("no existe en la db");
   } else {
-    res.send(finalBreed);
+    res.status(200).send(finalBreed);
   }
 });
 

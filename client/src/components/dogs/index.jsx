@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
+// import { useSelector } from "react-redux";
 // import { Link } from "react-router-dom";
-import {
-  // getApiDogs,
-  // getDbDogs,
-  getDogs,
-  // getTemperaments,
-  // handleAlphabeticChange,
-  // handleDbChange,
-  // handleTemperamentChange,
-  // handleWeightChange,
-} from "../../store/actions";
+// import {
+// getApiDogs,
+// getDbDogs,
+// getDogs,
+// getTemperaments,
+// handleAlphabeticChange,
+// handleDbChange,
+// handleTemperamentChange,
+// handleWeightChange,
+// } from "../../store/actions";
 import Dog from "../dog";
 // import Temperament from "../temperaments";
 import "./index.css";
@@ -25,7 +26,7 @@ export default function Dogs({ dogsFilter }) {
   // const [auxDogs, setDogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
 
-  let dispatch = useDispatch();
+  // let dispatch = useDispatch();
 
   useEffect(() => {
     setDogs([...dogsFilter].splice(0, 8));
@@ -70,6 +71,7 @@ export default function Dogs({ dogsFilter }) {
     setCurrentPage(prevPage);
     setDogs([...dogsFilter].splice(firstIndex, 8));
   }
+
   return (
     <div className="container">
       {/* {console.log(dogs)} */}
@@ -126,6 +128,7 @@ export default function Dogs({ dogsFilter }) {
                 key={dog.id}
                 id={dog.id}
                 name={dog.name}
+                life_span={dog.life_span}
                 temperament={
                   dog.temperament ? (
                     dog.temperament

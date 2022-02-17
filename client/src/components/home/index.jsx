@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { getDogs } from "../../store/actions";
-import CreateDog from "../createDog";
+// import CreateDog from "../createDog";
 import Dogs from "../dogs";
 import SearchBar from "../searchBar";
 

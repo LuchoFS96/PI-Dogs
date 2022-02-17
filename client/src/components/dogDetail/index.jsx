@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+// import  { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { getDogDetail } from "../../store/actions";
@@ -35,16 +36,21 @@ export default function DogDetail() {
             src={dog.image ? dog.image : dog.image_url}
             alt={`${dog.name}_image`}
           />
-          <h3>Height: {dog.height.metric ? dog.height.metric : dog.height}</h3>
+          <h3>
+            Height: {dog.height.metric ? dog.height.metric : dog.height} cm
+          </h3>
           <h3>
             Weight: {dog.weight.metric ? dog.weight.metric : dog.weight} kg
           </h3>
-          <h3>Life Span: {dog.life_span}</h3>
+          <h3>
+            Life Span: {dog.life_span} {dog.id.length > 5 ? "years" : <></>}
+          </h3>
           <h3>
             Temperaments{" "}
             {dog.temperament
               ? dog.temperament
-              : dog.temperaments.map((temperament) => temperament.name + " ")}
+              : dog.temperaments &&
+                dog.temperaments.map((temperament) => temperament.name + " ")}
           </h3>{" "}
           <br />
           <Link to="/home" style={{ textDecoration: "none" }}>
