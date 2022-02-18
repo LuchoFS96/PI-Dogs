@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { createDog, getTemperaments } from "../../store/actions";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
 
 export default function CreateDog(props) {
   let dispatch = useDispatch();
+  let navigate = useNavigate();
   let i = 0;
 
   const [state, setState] = useState({
@@ -99,11 +100,15 @@ export default function CreateDog(props) {
         temperaments: [],
       });
       dispatch(createDog(dog));
+      alert("Successfully Created New Doggi :D");
+      navigate("/home");
     }
   }
 
   function addTemp(e) {
-    console.log("added " + e.target.value);
+    // {
+    //   <label>Se anadino {e.target.value}</label>;
+    // }
     setState({
       ...state,
       temperaments: [...state.temperaments, e.target.value],
@@ -149,6 +154,18 @@ export default function CreateDog(props) {
       errors.max_life_span = "Max life can not be less";
     }
     return errors;
+  }
+
+  function deleteTemp(e) {
+    e.preventDefault();
+
+    setState({
+      ...state,
+      temperaments: state.temperaments.filter(
+        (temp) => temp !== e.target.value
+      ),
+    });
+    e.target.value = "";
   }
 
   return (
@@ -273,8 +290,36 @@ export default function CreateDog(props) {
                 );
               })}
           </select>
-          <input type="submit" value="send"></input>
+          <br />
+          <br />
+          {/* <label>{state.temperaments && state.temperaments}</label> */}
+          <select onChange={(e) => deleteTemp(e)}>
+            <option value="">Select Temperament to Delete</option>
+            {state.temperaments &&
+              state.temperaments.map((temperament) => {
+                return (
+                  <option
+                    temperament={temperament}
+                    key={i++}
+                    id={state.temperaments.indexOf(temperament)}
+                    value={temperament}
+                  >
+                    {temperament}
+                  </option>
+                );
+              })}
+          </select>
+          <br />
+          <br />
+          <input type="submit" value="Send" className="button"></input>
         </form>
+        {/* <div className="delete_temperament">
+          <label>Select Temperament to Delete</label>
+          {state.temperaments &&
+            state.temperaments.map((temperament) => {
+              return <input type="checkbox">{temperament}</input>;
+            })}
+        </div> */}
         <br />
         <Link to="/home">
           <button className="button">Go Back</button>

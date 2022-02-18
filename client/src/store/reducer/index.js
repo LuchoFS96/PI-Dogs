@@ -10,6 +10,7 @@ import {
   GET_DB_DOGS,
   HANDLE_ALPHABETIC_CHANGE,
   HANDLE_WEIGHT_CHANGE,
+  DELETE_DOG,
   // SET_PAGES,
   // ADD_TEMPERAMENT,
 } from "../actions";
@@ -164,6 +165,11 @@ export default function reducer(state = initialState, action) {
     //     pages: Math.floor(action.payload.length / 8),
     //     // Math.floor(dogsFilter.length / 8
     //   };
+    case DELETE_DOG:
+      return {
+        ...state,
+        filteredDogs: action.payload,
+      };
 
     default:
       return {

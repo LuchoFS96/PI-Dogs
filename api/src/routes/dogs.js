@@ -101,8 +101,33 @@ router.post("/", (req, res, next) => {
 router.put("/", (req, res, next) => {
   res.send("Soy un put de dogs");
 });
-router.delete("/", (req, res, next) => {
-  res.send("Soy un delete de dogs");
+router.delete("/", async (req, res, next) => {
+  let { id } = req.query;
+  // Race.destroy({ where: { id } });
+
+  await Race.destroy({ where: { id } });
+
+  breedsDB = await Race.findAll({
+    include: {
+      model: Temperament,
+    },
+  });
+  breedsApi = await axios.get(
+    `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
+  );
+  let filteredBreeds = breedsApi.data.map((breed) => {
+    return {
+      id: breed.id,
+      name: breed.name,
+      height: breed.height,
+      weight: breed.weight,
+      life_span: breed.life_span,
+      image_url: breed.image.url,
+      temperament: breed.temperament,
+    };
+  });
+  let allBreeds = [...breedsDB, ...filteredBreeds];
+  res.send(allBreeds);
 });
 
 module.exports = router;

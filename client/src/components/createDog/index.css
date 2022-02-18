@@ -3,7 +3,7 @@
   height: 100%;
   width: 100%;
   position: absolute;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 .create-dog-form {
   display: flex;
@@ -45,4 +45,10 @@ input {
   overflow: hidden;
   cursor: pointer;
   border-radius: 15px;
+}
+
+.delete_temperament {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }

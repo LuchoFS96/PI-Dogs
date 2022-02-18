@@ -2,17 +2,27 @@ import React, { useEffect } from "react";
 // import  { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getDogDetail } from "../../store/actions";
+import { getDogDetail, deleteDog } from "../../store/actions";
 import { Link } from "react-router-dom";
 import "./index.css";
+import { useNavigate } from "react-router-dom";
 
-export default function DogDetail() {
+export default function DogDetail(props) {
   let { id } = useParams();
+
+  let history = useNavigate();
+
   let dispatch = useDispatch();
   let dog = useSelector((state) => state.detailDog);
   useEffect(() => {
     dispatch(getDogDetail(id));
   }, [dispatch, id]);
+  console.log(props);
+  function handleClick() {
+    dispatch(deleteDog(dog.id));
+    alert(`Se elimino ${dog.name}`);
+    history("/home");
+  }
 
   //   return dog ? (
   //     <div>
@@ -53,6 +63,17 @@ export default function DogDetail() {
                 dog.temperaments.map((temperament) => temperament.name + " ")}
           </h3>{" "}
           <br />
+          {dog.id.length > 6 ? (
+            <div>
+              <button className="button_delete" onClick={(e) => handleClick(e)}>
+                Delete
+              </button>
+              <br />
+              <br />
+            </div>
+          ) : (
+            <></>
+          )}
           <Link to="/home" style={{ textDecoration: "none" }}>
             <button className="button">Go Back</button>
           </Link>

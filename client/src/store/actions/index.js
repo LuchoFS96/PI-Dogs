@@ -12,6 +12,7 @@ export const GET_DB_DOGS = "GET_DB_DOGS";
 export const HANDLE_ALPHABETIC_CHANGE = "HANDLE_ALPHABETIC_CHANGE";
 export const HANDLE_WEIGHT_CHANGE = "HANDLE_WEIGHT_CHANGE";
 export const SET_PAGES = "SET_PAGES";
+export const DELETE_DOG = "DELETE_DOG";
 
 export function getDogs() {
   return function (dispatch) {
@@ -57,6 +58,17 @@ export function searchDog(search) {
         });
       })
       .catch((error) => console.log(error));
+  };
+}
+
+export function deleteDog(id) {
+  return function (dispatch) {
+    axios.delete(`http://localhost:3001/dogs?id=${id}`).then((dogs) => {
+      dispatch({
+        type: DELETE_DOG,
+        payload: dogs.data,
+      });
+    });
   };
 }
 

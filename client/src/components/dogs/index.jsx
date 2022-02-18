@@ -122,30 +122,34 @@ export default function Dogs({ dogsFilter }) {
       </div> */}
       <div className="container-dogs">
         {dogs ? (
-          dogs.map((dog) => {
-            return (
-              <Dog
-                key={dog.id}
-                id={dog.id}
-                name={dog.name}
-                life_span={dog.life_span}
-                temperament={
-                  dog.temperament ? (
-                    dog.temperament
-                  ) : dog.temperaments ? (
-                    dog.temperaments.map(
-                      (temperament) => temperament.name + " "
+          dogs.length > 0 ? (
+            dogs.map((dog) => {
+              return (
+                <Dog
+                  key={dog.id}
+                  id={dog.id}
+                  name={dog.name}
+                  life_span={dog.life_span}
+                  temperament={
+                    dog.temperament ? (
+                      dog.temperament
+                    ) : dog.temperaments ? (
+                      dog.temperaments.map(
+                        (temperament) => temperament.name + " "
+                      )
+                    ) : (
+                      <></>
                     )
-                  ) : (
-                    <></>
-                  )
-                }
-                img={dog.image_url}
-                weight={dog.weight}
-                height={dog.height}
-              />
-            );
-          })
+                  }
+                  img={dog.image_url}
+                  weight={dog.weight}
+                  height={dog.height}
+                />
+              );
+            })
+          ) : (
+            <>No se Encontro el Perrito</>
+          )
         ) : (
           <div>cargando</div>
         )}

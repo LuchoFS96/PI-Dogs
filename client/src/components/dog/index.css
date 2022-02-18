@@ -47,3 +47,19 @@ img {
 }
 .container-img {
 }
+
+.button_delete {
+  position: relative;
+  background-color: #aa0505;
+  border: none;
+  font-size: 14px;
+  color: #ffffff;
+  padding: 10px;
+  width: 75px;
+  text-align: center;
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 15px;
+}
