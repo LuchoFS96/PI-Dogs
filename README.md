@@ -13,7 +13,7 @@
 
     ## Henry Dogs is an individual project developed during the Henry Bootcamp.
     ## In it, I utilized an external API (TheDogApi) to get all different breed's data. 
-    ## I implemented algorithms in which the data and modified to accomplish different objectives, such as:
+    ## I implemented algorithms in which the data is modified to accomplish different objectives, such as:
     
         # Filter breeds
         # Sort them
